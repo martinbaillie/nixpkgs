@@ -9,7 +9,7 @@ buildPythonPackage rec {
   # note: outscale package is broken, __init__.py is missing
   src = fetchPypi {
     inherit pname version;
-    sha256 = "17v5nzswva74bawxrvkza8a5d9aqyhb2gkncp3fqv6rszmk62hw6";
+    sha256 = "0bmi0hxcb7a75xl1lrba35fx79i5rkqmx0x02bm4dv5zrlqkqn3g";
   };
 
   patches = [ ./diags_fix_aliases.patch ];
