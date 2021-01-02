@@ -1,15 +1,9 @@
-{ lib
-, fetchFromGitHub
-, buildPythonPackage
-, fetchPypi
-, isPy3k
-, graphviz
-}:
+{ lib, fetchFromGitHub, buildPythonPackage, fetchPypi, isPy3k, graphviz }:
 
 buildPythonPackage rec {
   pname = "diagrams";
-  version = "0.17.0";
-  disabled = ! isPy3k;
+  version = "0.18.0";
+  disabled = !isPy3k;
 
   # TODO consider packaging from Github: https://github.com/mingrammer/diagrams
   # note: outscale package is broken, __init__.py is missing
@@ -18,9 +12,7 @@ buildPythonPackage rec {
     sha256 = "17v5nzswva74bawxrvkza8a5d9aqyhb2gkncp3fqv6rszmk62hw6";
   };
 
-  patches = [
-    ./diags_fix_aliases.patch
-  ];
+  patches = [ ./diags_fix_aliases.patch ];
 
   # This script is patching setup.py from the pypi tarball, to retain
   # the png images which this library uses to generate diagrams.
@@ -48,7 +40,7 @@ buildPythonPackage rec {
       echo "    data_files=["
       for d in ''${dirs[*]}
       do
-        echo "        (''\'''${d}''\', ["
+        echo "        ('''${d}', ["
         printf "            "
         find "''${d}" -type f -name "*.png" -printf "'%p', " | sed 's/, $//'
         echo "]),"
@@ -61,8 +53,8 @@ buildPythonPackage rec {
 
   meta = with lib; {
     description = "Generate infrastructure images from code";
-    homepage    = "https://diagrams.mingrammer.com/";
-    license     = licenses.mit;
-    maintainers =  with maintainers; [ addict3d ];
+    homepage = "https://diagrams.mingrammer.com/";
+    license = licenses.mit;
+    maintainers = with maintainers; [ addict3d ];
   };
 }
