@@ -40,7 +40,7 @@ buildPythonPackage rec {
       echo "    data_files=["
       for d in ''${dirs[*]}
       do
-        echo "        ('''${d}', ["
+        echo "        (''\'''${d}''\', ["
         printf "            "
         find "''${d}" -type f -name "*.png" -printf "'%p', " | sed 's/, $//'
         echo "]),"
